@@ -14,3 +14,11 @@ This application continuously monitors servers by pinging them in real-time and 
 - **Python File Optimization**: Optimize the Python file for better performance.
 - **ICMP Packet Functionality**: Add a functionality to send ICMP packets to a particular server to check which ports are open, thus knowing the possible services running on them.
 
+## Setup and Installation
+
+Follow these steps to set up and run the application:
+
+1. **Clone the Repository**: Clone the repository to your local machine.
+
+```bash
+git clone https://github.com/Quantumgoku/Server-Monitoring-App/```
