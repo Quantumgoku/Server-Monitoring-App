@@ -6,16 +6,27 @@ exports.generateReport = async (req, res) => {
         return res.status(400).json({ message: 'Please provide startDate, endDate, and ip' });
     }
 
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    end.setHours(23, 59, 59, 999);
+
     try {
         const logs = await ServerStatusLog.find({
             ip,
             timestamp: {
-                $gte: new Date(startDate),
-                $lte: new Date(endDate)
+                $gte: start.toISOString(),
+                $lte: end.toISOString()
             }
         }).sort({ timestamp: 1 });
 
-        res.json(logs);
+        const formattedLogs = logs.map(log => ({
+            date: log.timestamp.toISOString().split('T')[0],
+            time: log.timestamp.toISOString().split('T')[1].slice(0, 8),
+            status: log.status
+        }));
+
+        res.json(formattedLogs);
     } catch (error) {
         console.error('Error generating report:', error);
         res.status(500).json({ message: 'Server error' });

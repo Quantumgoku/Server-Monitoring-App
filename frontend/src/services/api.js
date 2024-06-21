@@ -40,8 +40,8 @@ export const getServerStatus = (ip) => {
 
 const token = getToken();
 
-export const getReport = ({ ip, startDate, endDate }) => 
-    axios.post(`${API_URL}/report`, {
+export const getReport = ({ ip, startDate, endDate }) => {
+    return axios.post(`${API_URL}/report`, {
         ip,
         startDate,
         endDate
@@ -50,7 +50,7 @@ export const getReport = ({ ip, startDate, endDate }) =>
             Authorization: `Bearer ${token}`,
         },
     });
-
+}
 export const addServer = (server) => {
     const token = getToken();
     return axios.post(`${API_URL}/servers`, server, {
