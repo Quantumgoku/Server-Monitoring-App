@@ -53,6 +53,7 @@ const Dashboard = () => {
         try {
             const response = await getServerStatus(ip);
             const latestStatus = response.data[response.data.length - 1]; 
+            console.log(latestStatus);
             setServerStatus(latestStatus.status);
             setSelectedServerIp(ip);
         } catch (err) {

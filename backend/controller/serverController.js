@@ -45,7 +45,12 @@ const getServerStatus = async (req, res) => {
     const { ip } = req.params;
     try {
         const logs = await ServerStatusLog.find({ ip }).sort({ timestamp: -1 });
-        res.status(200).json(logs);
+        //only return the latest status
+        if (logs.length > 0) {
+            res.status(200).json([logs[0]]);
+        } else {
+            res.status(404).json({ message: 'No logs found' });
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });

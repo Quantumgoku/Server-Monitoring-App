@@ -23,7 +23,7 @@ const ensureMasterAdmin = async () => {
     const masterAdmin = await User.findOne({ role: 'masteradmin' });
     if(!masterAdmin){
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash('masterAdmin_password', salt);
+        const hashedPassword = await bcrypt.hash('masterpassword', salt);
         await User.create({
             username: 'masteradmin',
             password: hashedPassword,
